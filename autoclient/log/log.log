@@ -1,0 +1,5 @@
+2019-10-26 15:51:30,927 - logfile - DEBUG -log:  Traceback (most recent call last):
+  File "C:\Users\wanglixing\Desktop\CMDB\autoclient\src\plugins\disk.py", line 15, in linux
+    with open(os.path.join(self.base_dir, 'file', 'disk.out')) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\wanglixing\\Desktop\\CMDB\\autoclient\\file\\disk.out'
+

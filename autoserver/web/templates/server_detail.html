@@ -1,0 +1,160 @@
+{% extends 'layout.html' %}
+
+
+{% block css %}
+
+    <style>
+
+        .guige {
+            margin: 20px;
+        }
+
+        .guige-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .guige-table .title {
+            background: #f5fafe;
+            text-align: left;
+            font-weight: bold;
+            line-height: 32px;
+            height: 32px;
+            font-family: "微软雅黑";
+        }
+
+        .guige-table td, .content .guige-table th {
+            border: 1px solid #dcdcdc;
+            line-height: 30px;
+            height: 30px;
+            padding: 0 10px;
+        }
+
+        .guige-table .body-left {
+            width: 126px;
+            font-weight: normal;
+            text-align: right;
+            color: #666;
+        }
+
+        .guige-table .body-right {
+            color: #333;
+        }
+
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="guige">
+        <table class="guige-table">
+            <tbody>
+            <tr>
+                <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">主机信息</th>
+            </tr>
+            <tr>
+                <td colspan="2">主机名</td>
+                <td>系统</td>
+                <td colspan="2">CPU个数</td>
+
+            </tr>
+
+
+            <tr>
+                <td colspan="2">{{ obj.hostname }}</td>
+                <td>{{ obj.os_platform }}</td>
+                <td colspan="2">{{ obj.cpu_count }}</td>
+
+
+            </tr>
+            <tr>
+                <td colspan="2">CPU型号</td>
+                <td colspan="3">sn号</td>
+
+            </tr>
+            <tr>
+                <td colspan="2">{{ obj.cpu_model }}</td>
+                <td colspan="3">{{ obj.sn }}</td>
+            </tr>
+
+
+            <tr>
+                <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">网卡信息</th>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td>MAC地址</td>
+                <td>IP地址</td>
+                <td colspan="2">掩码</td>
+            </tr>
+
+            {% for nic in obj.nic_list.all %}
+                <tr>
+                    <td>{{ nic.name }}</td>
+                    <td>{{ nic.hwaddr }}</td>
+                    <td>{{ nic.ipaddrs }}</td>
+                    <td colspan="2">{{ nic.netmask }}</td>
+                </tr>
+            {% endfor %}
+
+
+
+            <tr>
+                <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                    <span>内存信息</span>
+
+                </th>
+            </tr>
+            <tr>
+                <td>插槽</td>
+                <td>容量</td>
+                <td>型号</td>
+                <td colspan="2">制造商</td>
+            </tr>
+
+            {% for memory in obj.memory_list.all %}
+                <tr>
+                    <td>{{ memory.slot }}</td>
+                    <td>{{ memory.capacity }}</td>
+                    <td>{{ memory.model }}</td>
+                    <td colspan="2">{{ memory.manufacturer }} </td>
+                </tr>
+            {% endfor %}
+
+
+
+            <tr>
+                <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                    <span>硬盘信息</span>
+                </th>
+            </tr>
+            <tr>
+                <td>插槽</td>
+                <td>容量</td>
+                <td>接口类型</td>
+                <td colspan="2">型号</td>
+
+            </tr>
+
+
+            {% for disk in disks %}
+                <tr>
+                    <td>{{ disk.slot }}</td>
+                    <td>{{ disk.capacity }}</td>
+                    <td>{{ disk.pd_type }}</td>
+                    <td colspan="2">{{ disk.model }}</td>
+                </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+    <a href="{% url 'web:server_add' %}" class="btn btn-primary btn-sm">添加</a>
+
+    <table class="table table-bordered table-hover">
+
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>主机名</th>
+            <th>状态</th>
+            <th>机房</th>
+            <th>机柜号</th>
+            <th>机柜中序号</th>
+            <th>业务线</th>
+
+            <th>操作</th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for server in servers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{% url 'web:server_detail' server.pk %}"> {{ server.hostname }}</a>
+                </td>
+                <td>{{ server.get_device_status_id_display }}</td>
+                <td>{{ server.idc }}</td>
+                <td>{{ server.cabinet_num }}</td>
+                <td>{{ server.cabinet_order }}</td>
+                <td>{{ server.business_unit }}</td>
+                <td><a href="{% url 'web:server_edit' server.pk %}"> <i class="fa fa-edit"></i> </a></td>
+
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

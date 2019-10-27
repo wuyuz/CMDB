@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+
+{% block css %}
+    <style>
+
+        .time {
+            padding: 10px;
+            border: 1px solid #ddd;
+            position: absolute;
+            width: 161px;
+            left: -190px;
+            box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .record {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 17px;
+            min-height: 40px;
+            box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .record .auther {
+            text-align: right;
+            padding: 5px 0px;
+            color: #9E9C9C;
+        }
+
+        .record-arrow {
+            position: absolute;
+            width: 24px;
+            height: 14px;
+            background: url(/static/img/bg_dot_left3.png) no-repeat;
+            top: 15px;
+            left: -6px;
+            text-indent: -9999em;
+        }
+
+        .tag {
+            padding: 6px;
+            background-color: #00a2ca;
+            margin: 10px;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .add-tag {
+            margin: 10px;
+            color: #00a2ca;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+    <div content="3" class="clearfix" style="margin-left: 190px">
+
+
+        {% for record in obj.records.all %}
+            <div class="left clearfix" style="border-left:2px dashed #ddd;">
+
+                <div style="position:relative;">
+                    <div class="time">{{ record.create_at|date:'Y-m-d H:i:s' }}</div>
+                    <div class="record-arrow"></div>
+                    <div class="record">
+                        {{ record.content }}
+                        <div class="auther">
+                            <span><i class="fa fa-user"></i></span>
+                            <span>cmdb</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+
+
+    </div>
+
+
+{% endblock %}
